@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    *
+    {
+        margin-left:10px;
+    }
+    img {
+      height: 150px;
+      width: 150px;
+    }
+  </style>
+  <body>
+    <h1>This account belongs to <%= userData.name %></h1>
+    <h2>
+      Followers: <%= userData.followers %> &nbsp; &nbsp; &nbsp; Following:
+      <%=userData.following %>
+    </h2>
+    <hr />
+    <% for(let post of userData.posts) { %>
+    <img src="<%=post.image%>" /> <br />
+    <h3>
+      Likes:<%=post.likes%> &nbsp; &nbsp; &nbsp; Comments:<%=post.comments%>
+    </h3>
+    <% } %>
+  </body>
+</html>
