@@ -1,0 +1,1 @@
+Welcome to the Backend Learning directory! This directory is a curated collection of resources, tutorials, and exercises designed to guide you through backend development. From fundamental concepts to advanced backend practices, this directory aims to help developers of all levels enhance their skills and build robust, scalable backend systems.
