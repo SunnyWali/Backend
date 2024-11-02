@@ -18,6 +18,7 @@ app.get("/:username",(req,res)=>
     let{username}=req.params;
     const data=require("./data.json");
     const userData=data[username];
+    console.log(userData);
     if(userData)
     {
     res.render("instagram",{userData});
