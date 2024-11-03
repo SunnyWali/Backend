@@ -1,18 +1,24 @@
-const express = require("express");
-const app = express();
-const port = 8080;
+const express=require("express");
+const app=express();
 
-app.listen(port, (req, res) => {
+
+const port=8080;
+app.listen(port,(req,res)=>
+{
     console.log("Server is listening to the client requests");
 });
-
-app.get("/register", (req, res) => {
-    let { user, pass } = req.query;
-    res.send(`Standard get response.Welcome @ ${user}`);
+app.use(express.urlencoded({extended:true}));
+app.use(express.json());
+app.get("/request",(req,res)=>
+{
+    let{user,pass}=req.query;
+    console.log(req.query);
+    res.send(`Welcome to the account @ ${user}`);
 });
 
-app.post("/register", (req, res) => {
-    let { user, pass } = req.query;
-    res.send(`Welcome to the page @ ${user}`);
-    console.log("this is the server side for the client side");
+app.post("/request",(req,res)=>
+{
+    let{user,pass}=req.body;
+    console.log(req.body);
+    res.send(`Welcome to the account @${user}`);
 });
