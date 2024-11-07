@@ -47,4 +47,5 @@ app.post("/posts",(req,res)=>
     // res.send("Server is working on post request");
     console.log("Server is working on post request");
     posts.push({username,content});
+    res.redirect("/posts");
 })

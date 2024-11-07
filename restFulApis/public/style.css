@@ -1,13 +1,17 @@
+*{
+    margin-left: 5px;
+    background-color: rgb(183, 197, 209);
+}
 .heading{
     color: maroon;
-    background-color: rgb(242, 242, 138);
-}
-
-.post
-{
-    background-color: antiquewhite;
 }
 
 .content{
-    background-color: rgb(127, 239, 239);
+    background-color: rgb(202, 227, 227);
 }
+
+.user{
+    background-color: rgb(235, 122, 122);
+    color: white;
+}
+
