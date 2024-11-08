@@ -2,6 +2,7 @@ const express=require("express");
 const app=express();
 const port=8080;
 const path=require("path");
+const { ppid } = require("process");
 app.listen(port,()=>
 {
     console.log("Server is listening to the port no: 8080");
@@ -13,14 +14,17 @@ app.use(express.urlencoded({extended:true}));
 app.use(express.static(path.join(__dirname,"public")));
 let posts=[
     {
+        id:"1a",
         username:"Sunny Wali",
         content:"I am from Jammu and Kashmir and i belong to kashmiri pandit group",
     },
     {
+        id:"2b",
         username:"Krishna Yadav",
         content:"I am from bihar and i am a full stack developer",
     },
     {
+        id:"3c",
         username:"Ramesh Pellivella",
         content:"I am from hyderabad and i am a backend developer",
     },
@@ -48,4 +52,11 @@ app.post("/posts",(req,res)=>
     console.log("Server is working on post request");
     posts.push({username,content});
     res.redirect("/posts");
-})
+});
+
+app.get("/posts/:id",(req,res)=>
+{
+    let{id}=req.params;
+    let post=posts.find((p)=>id===p.id);
+    res.render("show",{post});
+});
