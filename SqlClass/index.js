@@ -8,3 +8,5 @@ let getRandomData=()=> {
     password: faker.internet.password(),
   };
 }
+
+console.log(getRandomData());
