@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h2>This is the data of <%=user.email%></h2>
+    <form action="/users/<%=user.id%>?_method=patch" method="post">
+        <textarea name="name" rows="10" cols="30"><%=user.name%></textarea><br><br>
+        <input placeholder="enter the password" name="passsword" type="password"/> <br><br>
+        <button> Update Data </button>
+    </form>
+  </body>
+</html>
