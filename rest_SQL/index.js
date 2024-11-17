@@ -95,6 +95,26 @@ app.patch("/users/:id",(req,res)=>
         console.log(err);
     }
 });
+app.get("/users/new",(req,res)=>
+{
+    res.render("new");
+});
+
+app.post("/users",(req,res)=>
+{
+    let id=faker.string.uuid();
+    let{name,email,passsword}=req.body;
+    let q=`Insert into users(id,name,email,passsword) values('${id}','${name}','${email}','${passsword}')`;
+    try {
+        connection.query(q,(err,result)=>
+        {
+            if(err) throw err;
+            res.redirect("/users");
+        });
+    } catch (err) {
+        res.send("failed to insert the data into the database");
+    }
+});
 app.listen('8080', (req, res) => {
     console.log("Server is listening to port 8080");
 });
