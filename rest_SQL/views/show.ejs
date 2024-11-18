@@ -30,6 +30,11 @@
               <button>Edit Post</button>
             </form>
           </td>
+          <td>
+            <form action="/users/<%=user.id%>?_method=delete" method="post">
+              <button> Delete Post </button>
+            </form>
+          </td>
       </tr> 
       <%}%>
     </table>
