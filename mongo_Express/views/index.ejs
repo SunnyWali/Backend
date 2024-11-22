@@ -7,6 +7,10 @@
   </head>
   <link rel="stylesheet" href="/style.css" />
   <body>
+    <h3> Create New Chats </h3>
+    <form action="/chats/new" method="get">
+        <button>Create New Chat</button>
+    </form>
     <h4> All Chats !</h4>
     <%for(let chat of chats) {%>
     <div class="chat">
@@ -16,6 +20,8 @@
       </div>
       <p>Received by: <%=chat.to%></p>
       <hr>
+      <p><%=chat.created_at.toString().split(" ")[4]%></p>
+      <p><%=chat.created_at.toString().split(" ").slice(0,4).join("-")%></p>
     </div>
     <br><br>
     <%}%>
