@@ -16,6 +16,7 @@ app.use((err,req,res,next)=>{
 
 app.use((err,req,res,next)=>{
     console.log("-----Error2-----");
+    next(err); //by writing this code the error is handled by the express default error-handling middleware
 });
 
 app.get("/err",(req,res)=>{
