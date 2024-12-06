@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h3> This message belongs to <%=chat._id%></h3>
+    <p> This message was sent from <%=chat.from%> to <%=chat.to%></p>
+    <form action="/chats/<%=chat._id%>?_method=PUT" method="Post">
+        <textarea rows="10" cols="30" name="msg"><%=chat.msg%></textarea><br><br>
+        <button> Update the message </button>
+    </form>
+</body>
+</html>
