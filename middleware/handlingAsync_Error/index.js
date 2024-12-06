@@ -89,15 +89,16 @@ app.delete("/chats/:id", asyncWrap(async (req, res,next) => {
 
 const handleValidationError=(err)=>{
     console.log("This is a validation error.Please follow rules");
-    console.dir(err.name);
+    // console.log(err.name);
+    console.dir(err.message);
     return err;
 }
 //Middleware to print the error name
 app.use((err,req,res,next)=>{
     console.log(err.name);
-    if(err.name==="Validation Error")
+    if(err.name==="ValidationError")
     {
-         err=handleValidatonError(err);
+         err=handleValidationError(err);
     }
     next(err);
 })
