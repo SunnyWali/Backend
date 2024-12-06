@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const Chat = require("./models/chat.js");
 const path = require("path");
 const methodOverride = require("method-override");
-const ExpressError=require("./ExpressError.js");
+const ExpressError = require("./ExpressError.js");
 app.use(methodOverride("_method"));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -25,32 +25,35 @@ app.get("/chats", async (req, res) => {
 
 //New Route
 app.get("/chats/new", (req, res) => {
-    throw new ExpressError(404,"Page Not Found !!!");
+    // throw new ExpressError(404,"Page Not Found !!!");
     res.render("new");
 });
 
 //Create Route
-app.post("/chats", (req, res) => {
-    let { from, msg, to } = req.body;
-    let chat = new Chat({
-        from: from,
-        msg: msg,
-        to: to,
-        created_at: new Date(),
-    });
-    chat.save().then(() => console.log("data strored successfully")).catch((err) => console.log(err));
-    res.redirect("/chats");
+app.post("/chats", async(req, res, next) => {
+    try {
+        let { from, msg, to } = req.body;
+        let chat = new Chat({
+            from: from,
+            msg: msg,
+            to: to,
+            created_at: new Date(),
+        });
+        await chat.save();
+        res.redirect("/chats");
+    } catch (err) {
+        next(err);
+    }
 });
 
 //New -Show Route
-app.get("/chats/:id",async(req,res,next)=>{
-let{id}=req.params;
-let chat=await Chat.findById(id);
-if(!chat)
-{
-    next(new ExpressError(500,"Chat Not Found!!!")); 
-}
-res.render("update",{chat});
+app.get("/chats/:id", async (req, res, next) => {
+    let { id } = req.params;
+    let chat = await Chat.findById(id);
+    if (!chat) {
+        next(new ExpressError(500, "Chat Not Found!!!"));
+    }
+    res.render("update", { chat });
 })
 //edit Route
 app.get("/chats/:id/edit", async (req, res) => {
@@ -69,17 +72,16 @@ app.put("/chats/:id", async (req, res) => {
 });
 
 //destroy route
-app.delete("/chats/:id",async(req,res)=>
-{
-    let{id}=req.params;
-    let deletedChat=await Chat.findByIdAndDelete(id);
+app.delete("/chats/:id", async (req, res) => {
+    let { id } = req.params;
+    let deletedChat = await Chat.findByIdAndDelete(id);
     console.log(deletedChat);
     res.redirect("/chats");
 });
 
 //Error Handling Middleware
-app.use((err,req,res,next)=>{
-    let{status=500,message="Chat not found"}=err;
+app.use((err, req, res, next) => {
+    let { status = 500, message = "Chat not found" } = err;
     res.status(status).send(message);
 })
 
